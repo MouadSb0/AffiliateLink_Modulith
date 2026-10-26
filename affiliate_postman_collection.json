@@ -1,0 +1,280 @@
+{
+  "info": {
+    "_postman_id": "a5d84032-aff1-482a-9cb8-b59367c29377",
+    "name": "AffiliateLink API",
+    "description": "Collection Postman pour tester les endpoints du module Profile d'AffiliateLink (Publishers, Advertisers, Admin).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "publisherId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "advertiserId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Publishers",
+      "item": [
+        {
+          "name": "1. Create Publisher",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData.id) {",
+                  "        pm.collectionVariables.set('publisherId', jsonData.id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"niche\": \"TECH\",\n  \"bio\": \"High-tech blogger and gadget reviewer.\",\n  \"country\": \"France\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/publishers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "publishers"]
+            },
+            "description": "Crée un nouveau profil Publisher avec un statut initial PENDING."
+          }
+        },
+        {
+          "name": "2. Get All Publishers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/publishers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "publishers"]
+            },
+            "description": "Récupère la liste de tous les profils Publishers."
+          }
+        },
+        {
+          "name": "3. Get Publisher by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/publishers/{{publisherId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "publishers", "{{publisherId}}"]
+            },
+            "description": "Récupère les détails d'un Publisher par son identifiant."
+          }
+        },
+        {
+          "name": "4. Test Validation Error (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"invalid-email\",\n  \"firstName\": \"\",\n  \"lastName\": \"Doe\",\n  \"niche\": \"UNKNOWN_NICHE\",\n  \"country\": \"France\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/publishers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "publishers"]
+            },
+            "description": "Démontre le retour 400 Bad Request avec la liste des erreurs de validation."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Advertisers",
+      "item": [
+        {
+          "name": "1. Create Advertiser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData.id) {",
+                  "        pm.collectionVariables.set('advertiserId', jsonData.id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"contact@acme.com\",\n  \"companyName\": \"Acme Corporation\",\n  \"sector\": \"E-commerce\",\n  \"website\": \"https://www.acme.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/advertisers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "advertisers"]
+            },
+            "description": "Crée un nouveau profil Advertiser avec un statut initial PENDING."
+          }
+        },
+        {
+          "name": "2. Get All Advertisers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/advertisers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "advertisers"]
+            },
+            "description": "Récupère la liste de tous les Advertisers."
+          }
+        },
+        {
+          "name": "3. Get Advertiser by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/advertisers/{{advertiserId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "advertisers", "{{advertiserId}}"]
+            },
+            "description": "Récupère un profil Advertiser par son identifiant."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Profile Lifecycle",
+      "item": [
+        {
+          "name": "1. Activate Profile (PENDING -> ACTIVE)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"ACTIVE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/profiles/{{publisherId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "profiles", "{{publisherId}}", "status"]
+            },
+            "description": "Valide et active un profil (retourne 204 No Content)."
+          }
+        },
+        {
+          "name": "2. Suspend Profile (ACTIVE -> SUSPENDED)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"SUSPENDED\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/profiles/{{publisherId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "profiles", "{{publisherId}}", "status"]
+            },
+            "description": "Suspend un profil actif (retourne 204 No Content)."
+          }
+        },
+        {
+          "name": "3. Reactivate Profile (SUSPENDED -> ACTIVE)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"ACTIVE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/profiles/{{publisherId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "profiles", "{{publisherId}}", "status"]
+            },
+            "description": "Réactive un profil suspendu (retourne 204 No Content)."
+          }
+        },
+        {
+          "name": "4. Test Illegal Transition (409 Conflict)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"PENDING\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/profiles/{{publisherId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "profiles", "{{publisherId}}", "status"]
+            },
+            "description": "Tente une transition interdite (par ex. revenir vers PENDING), ce qui doit renvoyer 409 CONFLICT."
+          }
+        }
+      ]
+    }
+  ]
+}

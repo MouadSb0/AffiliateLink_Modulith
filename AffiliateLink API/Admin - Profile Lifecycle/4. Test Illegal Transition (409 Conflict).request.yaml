@@ -1,0 +1,13 @@
+$kind: http-request
+description: Tente une transition interdite (par ex. revenir vers PENDING), ce qui doit renvoyer 409 CONFLICT.
+url: "{{baseUrl}}/api/admin/profiles/{{publisherId}}/status"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "status": "PENDING"
+    }
+order: 4000

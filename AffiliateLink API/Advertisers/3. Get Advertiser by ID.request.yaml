@@ -1,0 +1,5 @@
+$kind: http-request
+description: Récupère un profil Advertiser par son identifiant.
+url: "{{baseUrl}}/api/advertisers/{{advertiserId}}"
+method: GET
+order: 3000

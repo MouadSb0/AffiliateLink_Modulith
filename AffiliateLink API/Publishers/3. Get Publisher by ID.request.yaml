@@ -1,0 +1,5 @@
+$kind: http-request
+description: Récupère les détails d'un Publisher par son identifiant.
+url: "{{baseUrl}}/api/publishers/{{publisherId}}"
+method: GET
+order: 3000

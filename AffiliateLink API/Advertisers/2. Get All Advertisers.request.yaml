@@ -1,0 +1,5 @@
+$kind: http-request
+description: Récupère la liste de tous les Advertisers.
+url: "{{baseUrl}}/api/advertisers"
+method: GET
+order: 2000

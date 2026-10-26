@@ -1,0 +1,17 @@
+$kind: http-request
+description: Démontre le retour 400 Bad Request avec la liste des erreurs de validation.
+url: "{{baseUrl}}/api/publishers"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "email": "invalid-email",
+      "firstName": "",
+      "lastName": "Doe",
+      "niche": "UNKNOWN_NICHE",
+      "country": "France"
+    }
+order: 4000

@@ -1,0 +1,28 @@
+$kind: http-request
+description: Crée un nouveau profil Publisher avec un statut initial PENDING.
+url: "{{baseUrl}}/api/publishers"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "email": "john.doe@example.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "niche": "TECH",
+      "bio": "High-tech blogger and gadget reviewer.",
+      "country": "France"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 201) {
+          var jsonData = pm.response.json();
+          if (jsonData.id) {
+              pm.collectionVariables.set('publisherId', jsonData.id);
+          }
+      }
+    language: text/javascript
+order: 1000

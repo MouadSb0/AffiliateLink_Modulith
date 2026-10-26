@@ -1,0 +1,14 @@
+$kind: http-request
+name: 2. Suspend Profile (ACTIVE -> SUSPENDED)
+description: Suspend un profil actif (retourne 204 No Content).
+url: "{{baseUrl}}/api/admin/profiles/{{publisherId}}/status"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "status": "SUSPENDED"
+    }
+order: 2000

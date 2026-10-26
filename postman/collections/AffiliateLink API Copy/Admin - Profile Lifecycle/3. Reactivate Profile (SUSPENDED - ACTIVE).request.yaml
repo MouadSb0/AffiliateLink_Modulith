@@ -1,0 +1,14 @@
+$kind: http-request
+name: 3. Reactivate Profile (SUSPENDED -> ACTIVE)
+description: Réactive un profil suspendu (retourne 204 No Content).
+url: "{{baseUrl}}/api/admin/profiles/{{publisherId}}/status"
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "status": "ACTIVE"
+    }
+order: 3000

@@ -1,0 +1,6 @@
+$kind: collection
+description: Collection Postman pour tester les endpoints du module Profile d'AffiliateLink (Publishers, Advertisers, Admin).
+variables:
+  baseUrl: http://localhost:8080
+  publisherId: "1"
+  advertiserId: "1"

@@ -1,0 +1,5 @@
+$kind: http-request
+description: Récupère la liste de tous les profils Publishers.
+url: "{{baseUrl}}/api/publishers"
+method: GET
+order: 2000

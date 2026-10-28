@@ -1,4 +1,4 @@
-# 🚀 AffiliateLink - Module Profile (Sprint 3 - Brief 2)
+#  AffiliateLink - Module Profile (Sprint 3 - Brief 2)
 
 Plateforme d'affiliation nouvelle génération : implémentation de la première brique logicielle gérant l'identité et le cycle de vie de tous les acteurs (**Publishers** et **Advertisers**).
 
@@ -6,7 +6,7 @@ Ce projet respecte l'ensemble des spécifications fonctionnelles, techniques et 
 
 ---
 
-## 🏛️ Architecture & Conception
+## Architecture & Conception
 
 - **Organisation par Domaine (*Package-by-Feature*) :**
   - `com.affiliateLink.profile` : Contient tout ce qui relève du module profile (contrôleurs, services, repositories, entités, DTOs).
@@ -34,7 +34,7 @@ Ce projet respecte l'ensemble des spécifications fonctionnelles, techniques et 
 
 ---
 
-## 📡 Endpoints de l'API REST
+## Endpoints de l'API REST
 
 | Méthode | URL | Codes Réponse | Description |
 |---|---|---|---|
@@ -48,7 +48,7 @@ Ce projet respecte l'ensemble des spécifications fonctionnelles, techniques et 
 
 ---
 
-## 🛠️ Prérequis & Démarrage Rapide
+## Prérequis & Démarrage Rapide
 
 ### Prérequis
 - **Java 17** ou supérieur
@@ -73,11 +73,3 @@ mvn spring-boot:run
 mvn clean test
 ```
 Tous les scénarios (unitaires, services avec Mockito, intégration HTTP MockMvc pour 200, 201, 204, 400, 404, 409) sont exécutés avec succès.
-
----
-
-## 📚 Ressources d'Apprentissage Incluses
-
-Deux guides détaillés ont été rédigés pour vous accompagner :
-1. **[Guide d'Apprentissage Détaillé](GUIDE_APPRENTISSAGE.md)** : Explications théoriques et pratiques sur chaque concept (Flyway, JPA JOINED, records, RestControllerAdvice, Bean Validation, rich domain models, et tutoriel pour recréer le projet de A à Z).
-2. **[Exercices Pratiques avec Solutions](EXERCICES.md)** : 5 exercices progressifs (avec indices et corrigés) pour pratiquer et consolider vos compétences.
